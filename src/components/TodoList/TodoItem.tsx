@@ -29,7 +29,7 @@ const TodoItem = (props: ITodoItemProps) => {
             checked={innerTodo.isDone}
           />
         }
-        label={innerTodo.name}
+        label={innerTodo.title}
       />
       <Button onClick={() => navigate("/todos/" + todoItem.id)}>Open</Button>
       {/* <Link to={"/todos/" + todoItem.id}>Open</Link> */}

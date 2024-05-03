@@ -8,20 +8,28 @@ const UpsertTodoItem = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [todo, setTodo] = useState<ITodo | undefined>();
-  const [todoName, setTodoName] = useState("");
+
+  const [todoName, setTodoTitle] = useState("");
   const [todoDetail, setTodoDetail] = useState("");
+  const [todoCreateDate, setTodoCreateDate] = useState("");
+  const [todoUpdateDate, setTodoUpdateDate] = useState("");
+  const [todoDueDate, setTodoDueDate] = useState("");
+
   const onSave = async () => {
     if (!todo?.id && !todo) {
       await todoApi.addTodo({
-        name: todoName,
+        title: todoName,
         isDone: false,
-        detail: todoDetail,
+        description: todoDetail,
+        createDate: todoCreateDate,
+        updateDate: todoUpdateDate,
+        dueDate: todoDueDate
       });
     } else {
       await todoApi.updateTodo(todo.id!, {
         ...todo,
-        detail: todoDetail,
-        name: todoName,
+        description: todoDetail,
+        title: todoName,
       });
     }
     navigate("/todos");
@@ -29,7 +37,7 @@ const UpsertTodoItem = () => {
   const loadTodo = useCallback(async (id: string) => {
     const res = await todoApi.getTodo(id);
     setTodo(res.data);
-    setTodoName(res.data.name ?? "");
+    setTodoTitle(res.data.title ?? "");
     setTodoDetail("");
   }, []);
 
@@ -48,7 +56,7 @@ const UpsertTodoItem = () => {
             variant="outlined"
             value={todoName}
             onChange={(e) => {
-              setTodoName(e.target.value);
+              setTodoTitle(e.target.value);
             }}
           />
         </Grid>
