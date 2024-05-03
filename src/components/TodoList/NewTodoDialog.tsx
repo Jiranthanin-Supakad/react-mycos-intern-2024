@@ -28,7 +28,7 @@ const AddTodoDialog = ({
   const onSave = async () => {
     await todoApi.addTodo({
       title: todoName,
-      isDone: false,
+      // isDone: false,
       description: todoDetail,
       createDate: todoCreateDate,
       updateDate: todoUpdateDate,

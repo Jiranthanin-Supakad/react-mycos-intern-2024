@@ -19,7 +19,7 @@ const UpsertTodoItem = () => {
     if (!todo?.id && !todo) {
       await todoApi.addTodo({
         title: todoName,
-        isDone: false,
+        // isDone: false,
         description: todoDetail,
         createDate: todoCreateDate,
         updateDate: todoUpdateDate,

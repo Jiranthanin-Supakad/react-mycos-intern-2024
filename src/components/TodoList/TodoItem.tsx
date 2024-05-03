@@ -9,18 +9,18 @@ interface ITodoItemProps {
 const TodoItem = (props: ITodoItemProps) => {
   const { todoItem } = props;
   const [innerTodo, setInnerTodo] = useState<ITodo>(todoItem);
-  const onChange = useCallback(
-    async (value: boolean) => {
-      const newTodo: ITodo = { ...innerTodo, isDone: value };
-      if (newTodo.id) await todoApi.updateTodo(newTodo.id, newTodo);
-      setInnerTodo(newTodo);
-    },
-    [innerTodo]
-  );
+  // const onChange = useCallback(
+  //   async (value: boolean) => {
+  //     const newTodo: ITodo = { ...innerTodo, isDone: value };
+  //     if (newTodo.id) await todoApi.updateTodo(newTodo.id, newTodo);
+  //     setInnerTodo(newTodo);
+  //   },
+  //   [innerTodo]
+  // );
   const navigate = useNavigate();
   return (
     <>
-      <FormControlLabel
+      {/* <FormControlLabel
         control={
           <Checkbox
             onChange={(e) => {
@@ -32,7 +32,10 @@ const TodoItem = (props: ITodoItemProps) => {
         label={innerTodo.title}
       />
       <Button onClick={() => navigate("/todos/" + todoItem.id)}>Open</Button>
-      {/* <Link to={"/todos/" + todoItem.id}>Open</Link> */}
+      <Link to={"/todos/" + todoItem.id}>Open</Link> */}
+      <p>{innerTodo.title}</p>
+      <p>{innerTodo.description}</p>
+      <p>{innerTodo.dueDate}</p>
     </>
   );
 };

@@ -14,7 +14,7 @@ export interface ITodo {
   dueDate: string;
   // name: string;
   // detail?: string;
-  isDone: boolean;
+  // isDone: boolean;
 }
 
 const ListContainer = () => {
