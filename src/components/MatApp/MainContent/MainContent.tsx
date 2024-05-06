@@ -1,11 +1,14 @@
-import { Container } from "@mui/material";
+import { Container } from "@mui/material"
+import TodoForm from "../../TodoForm/TodoForm"
 
 const MainContent = () => {
-  return (
-    <main>
-      <Container>main</Container>
-    </main>
-  );
-};
+	return (
+		<main>
+			<Container>
+				<TodoForm />
+			</Container>
+		</main>
+	)
+}
 
-export default MainContent;
+export default MainContent

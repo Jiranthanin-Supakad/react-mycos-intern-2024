@@ -1,0 +1,78 @@
+:root {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+
+    .full-height {
+        background-color: #E5E4E4;
+        height: 100vh;
+    }
+
+    .ActitiesCard {
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        margin: 2% 5% 2%;
+        border-radius: 20px;
+        justify-content: space-between;
+    }
+    
+    .box-right h1 {
+        font-size: 2rem;
+        color: #35383C;
+        padding: 5%;
+    }
+
+    .ActitiesDetail {
+        margin: 5px;
+    }
+
+    .ActitiesDetail {
+        p {
+            margin: 5px;
+        }
+
+        .Title {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .Description {
+            font-size: 0.8125rem;
+            font-weight: 400;
+        }
+    }
+
+    .ActitiesDetail span {
+        display: inline-flex;
+        align-items: center;
+        margin: 5px;
+    }
+
+    .ActitiesDetail .DueDate,
+    .ActitiesDetail .DueTime {
+        font-size: 0.8125rem;
+        color: #35383C;
+        font-weight: medium;
+        line-height: 1;
+        margin-left: 5px;
+    }
+
+    .more-icon {
+        margin-left: auto;
+        margin-right: 5%;
+    }
+
+}
+
+/* Tablet */
+@media screen and (max-width: 1280px) and (min-width: 720px) {
+
+}
+
+/* Mobile */
+@media screen and (max-width: 720px) {
+
+}
