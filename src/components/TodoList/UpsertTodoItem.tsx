@@ -9,27 +9,25 @@ const UpsertTodoItem = () => {
   const navigate = useNavigate();
   const [todo, setTodo] = useState<ITodo | undefined>();
 
-  const [todoName, setTodoTitle] = useState("");
-  const [todoDetail, setTodoDetail] = useState("");
-  const [todoCreateDate, setTodoCreateDate] = useState("");
-  const [todoUpdateDate, setTodoUpdateDate] = useState("");
+  const [todoTitle, setTodoTitle] = useState("");
+  const [todoDescription, setTodoDescription] = useState("");
+  // const [todoCreateDate, setTodoCreateDate] = useState("");
+  // const [todoUpdateDate, setTodoUpdateDate] = useState("");
   const [todoDueDate, setTodoDueDate] = useState("");
 
   const onSave = async () => {
     if (!todo?.id && !todo) {
       await todoApi.addTodo({
-        title: todoName,
+        title: todoTitle,
         // isDone: false,
-        description: todoDetail,
-        createDate: todoCreateDate,
-        updateDate: todoUpdateDate,
+        description: todoDescription,
         dueDate: todoDueDate
       });
     } else {
       await todoApi.updateTodo(todo.id!, {
         ...todo,
-        description: todoDetail,
-        title: todoName,
+        description: todoDescription,
+        title: todoTitle,
       });
     }
     navigate("/todos");
@@ -38,7 +36,7 @@ const UpsertTodoItem = () => {
     const res = await todoApi.getTodo(id);
     setTodo(res.data);
     setTodoTitle(res.data.title ?? "");
-    setTodoDetail("");
+    setTodoDescription("");
   }, []);
 
   useEffect(() => {
@@ -52,9 +50,9 @@ const UpsertTodoItem = () => {
       <Grid container spacing={1} direction={"column"}>
         <Grid item>
           <TextField
-            label="Name"
+            label="Title"
             variant="outlined"
-            value={todoName}
+            value={todoTitle}
             onChange={(e) => {
               setTodoTitle(e.target.value);
             }}
@@ -62,11 +60,11 @@ const UpsertTodoItem = () => {
         </Grid>
         <Grid item>
           <TextField
-            label="Detail"
+            label="Description"
             variant="outlined"
-            value={todoDetail}
+            value={todoDescription}
             onChange={(e) => {
-              setTodoDetail(e.target.value);
+              setTodoDescription(e.target.value);
             }}
           />
         </Grid>

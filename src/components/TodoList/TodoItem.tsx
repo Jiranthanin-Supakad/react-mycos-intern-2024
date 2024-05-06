@@ -3,6 +3,7 @@ import { ITodo } from "./ListContainer";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { todoApi } from "../../api/TodoApi";
 import { Link, useNavigate } from "react-router-dom";
+
 interface ITodoItemProps {
   todoItem: ITodo;
 }
@@ -33,9 +34,16 @@ const TodoItem = (props: ITodoItemProps) => {
       />
       <Button onClick={() => navigate("/todos/" + todoItem.id)}>Open</Button>
       <Link to={"/todos/" + todoItem.id}>Open</Link> */}
-      <p>{innerTodo.title}</p>
-      <p>{innerTodo.description}</p>
-      <p>{innerTodo.dueDate}</p>
+      <div
+        style=
+        {{
+          backgroundColor: "#ffffff",
+          fontFamily: "Poppins"
+        }}>
+        <p>{innerTodo.title}</p>
+        <p>{innerTodo.description}</p>
+        <p>{innerTodo.dueDate}</p>
+      </div>
     </>
   );
 };

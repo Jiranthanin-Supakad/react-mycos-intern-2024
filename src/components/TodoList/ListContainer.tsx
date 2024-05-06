@@ -9,8 +9,8 @@ export interface ITodo {
   id?: string;
   title: string;
   description?: string;
-  createDate: string;
-  updateDate: string;
+  // createDate: string;
+  // updateDate: string;
   dueDate: string;
   // name: string;
   // detail?: string;

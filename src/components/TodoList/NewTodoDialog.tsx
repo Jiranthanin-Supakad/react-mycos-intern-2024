@@ -21,8 +21,8 @@ const AddTodoDialog = ({
 }) => {
   const [todoName, setTodoName] = useState("");
   const [todoDetail, setTodoDetail] = useState("");
-  const [todoCreateDate, setTodoCreateDate] = useState("");
-  const [todoUpdateDate, setTodoUpdateDate] = useState("");
+  // const [todoCreateDate, setTodoCreateDate] = useState("");
+  // const [todoUpdateDate, setTodoUpdateDate] = useState("");
   const [todoDueDate, setTodoDueDate] = useState("");
   
   const onSave = async () => {
@@ -30,8 +30,8 @@ const AddTodoDialog = ({
       title: todoName,
       // isDone: false,
       description: todoDetail,
-      createDate: todoCreateDate,
-      updateDate: todoUpdateDate,
+      // createDate: todoCreateDate,
+      // updateDate: todoUpdateDate,
       dueDate: todoDueDate
     });
     onSuccess?.();
