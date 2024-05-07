@@ -4,7 +4,7 @@
 }
 
 /* Desktop */
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1280px){
     .box-left {
         padding: 15%;
     }
@@ -72,10 +72,37 @@
         font-size: 0.9rem;
         font-weight: bold;
     }
+
+    .box-right {
+        background-color: #E5E4E4;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .box-right h1 {
+        font-size: 2rem;
+        color: #35383C;
+        padding: 5%;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .todo-list {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
 }
 
 /* Tablet */
-@media screen and (max-width: 1280px) and (min-width: 720px) {}
+@media screen and (max-width: 1280px) and (min-width: 720px) {
+}
 
 /* Mobile */
-@media screen and (max-width: 720px) {}
+@media screen and (max-width: 720px) {
+}
