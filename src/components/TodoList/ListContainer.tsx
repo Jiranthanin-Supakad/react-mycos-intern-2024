@@ -11,7 +11,7 @@ export interface ITodo {
   description?: string;
   // createDate: string;
   // updateDate: string;
-  dueDate: string;
+  dueDate?: string;
   // name: string;
   // detail?: string;
   // isDone: boolean;

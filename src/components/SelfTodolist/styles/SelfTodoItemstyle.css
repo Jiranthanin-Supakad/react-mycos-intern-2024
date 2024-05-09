@@ -1,7 +1,3 @@
-:root {
-    font-family: "Poppins", sans-serif;
-}
-
 /* Desktop */
 @media screen and (min-width: 1280px) {
 
@@ -9,9 +5,13 @@
         background-color: #FFFFFF;
         display: flex;
         align-items: center;
-        margin: 0 5% 2%;
+        margin: 0 5% 1%;
         border-radius: 20px;
         justify-content: space-between;
+    }
+
+    .ActitiesCard:hover{
+        background-color: #d8d8d8;
     }
     
     .ActitiesDetail {
@@ -53,20 +53,23 @@
         margin-left: auto;
         margin-right: 5%;
     }
-
 }
 
 /* Tablet */
 @media screen and (max-width: 1280px) and (min-width: 720px) {
-
     .ActitiesCard {
         background-color: #FFFFFF;
         display: flex;
         align-items: center;
-        margin: 2% 5% 2%;
+        margin: 0 5% 1%;
         border-radius: 20px;
         justify-content: space-between;
     }
+
+    .ActitiesCard:hover{
+        background-color: #d8d8d8;
+    }
+    
     
     .ActitiesDetail {
         margin: 5px;
@@ -107,6 +110,7 @@
         margin-left: auto;
         margin-right: 5%;
     }
+
 }
 
 /* Mobile */

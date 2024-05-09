@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import SelfTodoForm from '/Users/jiran/Documents/GitHub/react-mycos-intern-2024/src/components/SelfTodolist/SelfTodoForm.tsx';
+import SelfTodoForm from "../SelfTodoForm/SelfTodoForm";
 
 
 const SelfTodoAddEvent = ({

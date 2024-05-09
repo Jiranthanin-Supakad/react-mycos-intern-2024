@@ -1,9 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { themeConfig } from "./config/themeConfig";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Profile from "./pages/ProfilePage";
 import PageLayout from "./pages/PageLayout";
-import TodoUpsertPage from "./pages/TodoUpsertPage";
 import SelfTodolist from "./components/SelfTodolist/SelfTodolist";
 
 interface IROUTE {
@@ -15,18 +13,6 @@ const ROUTES: IROUTE[] = [
   {
     path: "/todos",
     component: <SelfTodolist />,
-  },
-  {
-    path: "/todos/new",
-    component: <TodoUpsertPage />,
-  },
-  {
-    path: "/todos/:id",
-    component: <TodoUpsertPage />,
-  },
-  {
-    path: "/profile",
-    component: <Profile />,
   },
 ];
 

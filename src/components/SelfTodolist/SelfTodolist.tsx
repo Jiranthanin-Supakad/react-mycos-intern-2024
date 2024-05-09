@@ -2,21 +2,29 @@ import { useState, useEffect, useCallback } from 'react';
 import { Button, Grid } from "@mui/material";
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import "./styles/SelfTodoliststyle.css";
 import SelfTodoItem from "./SelfTodoItem";
 import { todoApi } from "../../api/TodoApi";
-import SelfTodoAddEvent from './SelfTodoPopup/SelfTodoAddEvent';
+import SelfTodoAddEvent from './SelfTodoEvent/SelfTodoAddEvent';
+import SelfTodoFilter from './SelfTodoEvent/SelfTodoFilter';
+import UpdateSelfTodoForm from './UpdateDeleteSelfTodoForm/UpdateSelfTodoForm';
+import AddTodoDialog from '../TodoList/NewTodoDialog';
+import DeleteSelfTodoForm from './UpdateDeleteSelfTodoForm/DeleteSelfTodoForm';
 
 export interface ITodo {
     id?: string;
     title: string;
     description?: string;
-    dueDate: string;
+    dueDate?: string;
 }
 
 const SelfTodolist = () => {
     const [todos, setTodos] = useState<ITodo[]>([]);
+    const [openAddToDoDialog, setOpenAddToDoDialog] = useState<boolean>(false);
+    const [openEditTodo, setOpenEditTodo] = useState(false);
+    const [openDeleteTodo, setOpenDeleteTodo] = useState(false);
+    const [todoToEdit, setTodoToEdit] = useState<ITodo>();
+    const [idToDelete, setIdToDelete] = useState<string>('');
 
     const getTodos = useCallback(async () => {
         try {
@@ -43,50 +51,81 @@ const SelfTodolist = () => {
     };
 
     return (
-        <Grid container>
-            {/* //Grid left */}
-            <Grid item xs={12} md={3} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="box-left">
-                    <h1>Today</h1>
-                    <p>23 April 2024. Tuesday</p>
-                    <Button id="Allbtn" variant="outlined"
-                        startIcon={<Inventory2OutlinedIcon sx={iconStyle} />}
-                    >
-                        <span className="showAlltask">All</span>
-                        <span className="showIncompeletetask">10</span>
-                    </Button>
+        <>
+            <Grid container>
+                {/* //Grid left */}
+                <Grid item xs={12} md={3} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div className="box-left">
+                        <h1>Today</h1>
+                        <p>23 April 2024. Tuesday</p>
+                        <Button id="Allbtn" variant="outlined"
+                            startIcon={<Inventory2OutlinedIcon sx={iconStyle} />}
+                        >
+                            <span className="showAlltask">All</span>
+                            <span className="showIncompeletetask">10</span>
+                        </Button>
 
-                    <Button id="Todaybtn" variant="outlined"
-                        startIcon={<CalendarTodayOutlinedIcon sx={iconStyle} />}
-                    >
-                        <span className="showTodaytask">Today</span>
-                        <span className="showIncompeletetask">1</span>
-                    </Button>
-                </div>
+                        <Button id="Todaybtn" variant="outlined"
+                            startIcon={<CalendarTodayOutlinedIcon sx={iconStyle} />}
+                        >
+                            <span className="showTodaytask">Today</span>
+                            <span className="showIncompeletetask">1</span>
+                        </Button>
+                    </div>
 
-                {/* Add-New-Task-btn */}
-                <div className="AddTaskBox">
-                    <SelfTodoAddEvent onSuccess={handleSuccess} />
-                </div>
+                    {/* Add-New-Task-btn */}
+                    <div className="AddTaskBox">
+                        <SelfTodoAddEvent onSuccess={handleSuccess} />
+                    </div>
 
+                </Grid>
+
+                {/* //Grid right */}
+                <Grid item xs={12} md={9}>
+                    <div className="box-right">
+                        <div className="header">
+                            <h1>All</h1>
+                            {/* <SelfTodoFilter /> */}
+                        </div>
+                        <div className="todo-list">
+                            {todos.map((t) => (
+                                <SelfTodoItem 
+                                props={t} 
+                                onEdit={(data) => { 
+                                    setOpenEditTodo(true);
+                                    setTodoToEdit(data);
+                                }}
+                                sentId={(id) => {
+                                    setIdToDelete(id);
+                                    setOpenDeleteTodo(true);
+                                }}
+                                onDelete={getTodos}
+                                key={t.id} />
+                            ))}
+                        </div>
+                    </div>
+                </Grid>
             </Grid>
 
-            {/* //Grid right */}
-            <Grid item xs={12} md={9}>
-                <div className="box-right">
-                    <div className="header">
-                        <h1>All</h1>
-                        <FilterAltOutlinedIcon sx={{ fontSize: '2rem', color: '#35383C', marginRight: '5%' }} />
-                    </div>
-                    <div className="todo-list">
-                        {todos.map((t) => (
-                            <SelfTodoItem key={t.id} todoItem={t} />
-                        ))}
-                    </div>
-                </div>
-            </Grid>
+            <AddTodoDialog
+                open={openAddToDoDialog}
+                onClose={() => setOpenAddToDoDialog(false)}
+                onSuccess={getTodos}
+            />
+            <UpdateSelfTodoForm
+                open={openEditTodo}
+                onClose={() => setOpenEditTodo(false)}
+                onSuccess={getTodos}
+                dataToEdit={todoToEdit} />
 
-        </Grid>
+            <DeleteSelfTodoForm
+                open={openDeleteTodo}
+                onClose={() => setOpenDeleteTodo(false)}
+                onDelete={() => {getTodos(); 
+                    setOpenDeleteTodo(false);}}
+                id={idToDelete}
+                />
+        </>
     );
 };
 
