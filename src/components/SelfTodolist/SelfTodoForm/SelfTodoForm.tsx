@@ -36,11 +36,9 @@ const SelfTodoForm = ({
     }, [open]);
 
 
-    const newTodo = async (data: ISelfTodoForm) => {
-        return await new Promise(resolve => setTimeout(resolve, 3000))
-    }
+
     const onFormValid = async (data: ISelfTodoForm) => {
-        await newTodo(data)
+        // await newTodo(data)
         console.log("send to api success: ", data)
     }
 

@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, Grid, TextField, DialogActions, Button } from "@mui/material";
 import { todoApi } from "../../../api/TodoApi";
 import "/Users/jiran/Documents/GitHub/react-mycos-intern-2024/src/components/SelfTodolist/styles/SelfTodoFormpopup.css"
 import { useForm } from "react-hook-form";
 import { ISelfTodoForm } from "../SelfTodoForm/ISelfTodoForm";
 import { ITodo } from "../SelfTodolist";
-import { useParams } from "react-router-dom";
 
 const UpdateSelfTodoForm = ({
     open,
@@ -21,16 +20,9 @@ const UpdateSelfTodoForm = ({
     const [todoTitle, setTodoTitle] = useState("");
     const [todoDescription, setTodoDescription] = useState("");
     const [todoDueDate, setTodoDueDate] = useState("");
-    const [todo, setTodo] = useState<ITodo>();
-    const { id } = useParams();
+    // const [todo, setTodo] = useState<ITodo>();
 
     const onSave = async () => {
-        setTodo({
-            id: dataToEdit?.id,
-            title: todoTitle,
-            description: todoDescription,
-            dueDate: todoDueDate
-        })
         if (dataToEdit) {
             await todoApi.updateTodo(dataToEdit.id!, {
                 ...dataToEdit,
@@ -54,21 +46,18 @@ const UpdateSelfTodoForm = ({
         }
     }, [open]);
 
-    const newTodo = async (data: ISelfTodoForm) => {
-        return await new Promise(resolve => setTimeout(resolve, 3000))
-    }
-    const onFormValid = async (data: ISelfTodoForm) => {
-        await newTodo(data)
-        console.log("send to api success: ", data)
-    }
+    // const onFormValid = async (data: ISelfTodoForm) => {
+    //     await newTodo(data)
+    //     console.log("send to api success: ", data)
+    // }
 
-    const onFormInValid = (err: any) => {
-        console.log("form err: ", err)
-    }
+    // const onFormInValid = (err: any) => {
+    //     console.log("form err: ", err)
+    // }
 
     const {
         register,
-        handleSubmit,
+        // handleSubmit,
         formState: { errors },
     } = useForm<ISelfTodoForm>({
         defaultValues: {
@@ -78,11 +67,11 @@ const UpdateSelfTodoForm = ({
         },
     })
 
-    const onSubmit = handleSubmit(onFormValid, onFormInValid)
+    // const onSubmit = handleSubmit(onFormValid, onFormInValid)
 
     return (
         <Dialog open={open} onClose={onClose} PaperProps={{ sx: { borderRadius: 5, width: 400 } }}>
-            <form onSubmit={onSubmit} className="Edit-Box">
+            <form onSubmit={() => {}} className="Edit-Box">
                 <DialogTitle id="AddtaskTitle">Edit your task</DialogTitle>
                 <DialogContent>
                     <Grid container spacing={2} direction="column" sx={{ marginTop: '5px' }}>
@@ -156,7 +145,7 @@ const UpdateSelfTodoForm = ({
                                 }}
                             />
                         </Grid>
-                        {/* <Grid item>
+                        <Grid item>
                             <TextField
                                 fullWidth
                                 type="time"
@@ -175,7 +164,7 @@ const UpdateSelfTodoForm = ({
                                     },
                                 }}
                             />
-                        </Grid> */}
+                        </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions sx={{ justifyContent: 'center', margin: '2%' }}>

@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import UpdateSelfTodoForm from "../UpdateDeleteSelfTodoForm/UpdateSelfTodoForm";
-import { ITodo } from "../SelfTodolist";
+import UpdateSelfTodoForm from "../UpdateSelfTodoForm/UpdateSelfTodoForm";
 
 const SelfTodoEvent = ({
     onSuccess,
@@ -14,7 +13,6 @@ const SelfTodoEvent = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [openForm, setOpenForm] = useState(false);
-    const [todos, setTodos] = useState<ITodo[]>([]);
     const dropdownRef = useRef<HTMLDivElement>(null); 
 
     const toggleDropdown = () => {

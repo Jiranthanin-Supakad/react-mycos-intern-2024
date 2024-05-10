@@ -1,14 +1,12 @@
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
-import UpdateSelfTodoForm from "../UpdateDeleteSelfTodoForm/UpdateSelfTodoForm";
 import { useState } from 'react';
-import { ITodo } from '../SelfTodolist';
+import UpdateSelfTodoForm from '../UpdateSelfTodoForm/UpdateSelfTodoForm';
 const SelfEditTodoEvent = ({
     onSuccess,
 }: {
     onSuccess?: () => void;
 }) => {
     const [openForm, setOpenForm] = useState(false);
-    const [todos, setTodos] = useState<ITodo[]>([]);
 
     const handleCloseForm = () => {
         setOpenForm(false);

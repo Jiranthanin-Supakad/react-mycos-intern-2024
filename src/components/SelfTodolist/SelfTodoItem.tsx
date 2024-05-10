@@ -3,14 +3,11 @@ import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUnc
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import "./styles/SelfTodoItemstyle.css";
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ITodo } from './SelfTodolist';
 import SelfTodoEvent from './SelfTodoEvent/SelfTodoEvent';
 import { todoApi } from '../../api/TodoApi';
 
-interface ITodoItemProps {
-    todoItem: ITodo;
-}
 
 const SelfTodoItem = ({
     props,
@@ -26,7 +23,7 @@ const SelfTodoItem = ({
     onCheck: () => void;
 }) => {
     const todoItem = { ...props };
-    const [innerTodo, setInnerTodo] = useState<ITodo>(todoItem);
+    const [innerTodo] = useState<ITodo>(todoItem);
     const [isChecked, setIsChecked] = useState(false);
 
     function handleSuccess(): void {

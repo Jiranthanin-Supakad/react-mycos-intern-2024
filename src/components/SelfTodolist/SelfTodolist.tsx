@@ -6,9 +6,8 @@ import "./styles/SelfTodoliststyle.css";
 import SelfTodoItem from "./SelfTodoItem";
 import { todoApi } from "../../api/TodoApi";
 import SelfTodoAddEvent from './SelfTodoEvent/SelfTodoAddEvent';
-import UpdateSelfTodoForm from './UpdateDeleteSelfTodoForm/UpdateSelfTodoForm';
-import AddTodoDialog from '../TodoList/NewTodoDialog';
-import DeleteSelfTodoForm from './UpdateDeleteSelfTodoForm/DeleteSelfTodoForm';
+import UpdateSelfTodoForm from './UpdateSelfTodoForm/UpdateSelfTodoForm';
+import DeleteSelfTodoForm from './UpdateSelfTodoForm/DeleteSelfTodoForm';
 
 export interface ITodo {
     id?: string;
@@ -21,10 +20,8 @@ export interface ITodo {
 
 const SelfTodolist = () => {
     const [todos, setTodos] = useState<ITodo[]>([]);
-    const [openAddToDoDialog, setOpenAddToDoDialog] = useState<boolean>(false);
     const [openEditTodo, setOpenEditTodo] = useState(false);
     const [openDeleteTodo, setOpenDeleteTodo] = useState(false);
-    const [openCheckTodo, setOpenCheckTodo] = useState(false);
     const [todoToEdit, setTodoToEdit] = useState<ITodo>();
     const [idToDelete, setIdToDelete] = useState<string>('');
     
@@ -117,12 +114,6 @@ const SelfTodolist = () => {
                     </div>
                 </Grid>
             </Grid>
-
-            <AddTodoDialog
-                open={openAddToDoDialog}
-                onClose={() => setOpenAddToDoDialog(false)}
-                onSuccess={getTodos}
-            />
             <UpdateSelfTodoForm
                 open={openEditTodo}
                 onClose={() => setOpenEditTodo(false)}

@@ -9,7 +9,7 @@ const SelfTodoFilter = ({
     onUpdateInnerTodo: (todo: ITodo[]) => void; 
 }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [innerTodo, setInnerTodo] = useState<ITodo[]>([]);
+    const [innerTodo] = useState<ITodo[]>([]);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);

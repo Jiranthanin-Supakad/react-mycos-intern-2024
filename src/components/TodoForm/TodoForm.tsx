@@ -26,11 +26,11 @@ const TodoForm = () => {
 		},
 	})
 
-    const newTodo = async (data: ITodoForm) => {
-        return await new Promise(resolve => setTimeout(resolve, 3000))
-    }
+    // const newTodo = async (data: ITodoForm) => {
+    //     return await new Promise(resolve => setTimeout(resolve, 3000))
+    // }
 	const onFormValid = async (data: ITodoForm) => {
-        await newTodo(data)
+        // await newTodo(data)
         console.log("send to api success: ", data)
 	}
 
