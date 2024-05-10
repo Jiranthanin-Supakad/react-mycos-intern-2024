@@ -18,6 +18,7 @@ const SelfEditTodoEvent = ({
             <UpdateSelfTodoForm open={openForm} onClose={handleCloseForm} onSuccess={onSuccess} />
         </>
     )
+    
 }
 
 export default SelfEditTodoEvent
