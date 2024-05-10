@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import UpdateSelfTodoForm from "../UpdateDeleteSelfTodoForm/UpdateSelfTodoForm";
 import { ITodo } from "../SelfTodolist";
-import DeleteSelfTodoForm from "../UpdateDeleteSelfTodoForm/DeleteSelfTodoForm";
 
 const SelfTodoEvent = ({
     onSuccess,
@@ -16,6 +15,7 @@ const SelfTodoEvent = ({
     const [isOpen, setIsOpen] = useState(false);
     const [openForm, setOpenForm] = useState(false);
     const [todos, setTodos] = useState<ITodo[]>([]);
+    const dropdownRef = useRef<HTMLDivElement>(null); 
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -25,9 +25,23 @@ const SelfTodoEvent = ({
         setOpenForm(false);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+
     return (
         <>
-            <div className="event">
+            <div className="event" ref={dropdownRef}>
                 <div className="event-title" onClick={toggleDropdown}>
                     <MoreHorizOutlinedIcon sx={{ color: isOpen ? '#9ca1a7' : '#35383C' }} />
                 </div>

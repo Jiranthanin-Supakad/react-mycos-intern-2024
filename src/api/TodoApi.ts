@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ITodo } from "../components/TodoList/ListContainer";
+import { ITodo } from "../components/SelfTodolist/SelfTodolist";
 const base_url = "http://localhost:5005/Todo";
 export const todoApi = {
   getTodos: () => axios.get<ITodo[]>(base_url),

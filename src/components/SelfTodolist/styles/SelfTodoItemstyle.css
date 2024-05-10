@@ -53,6 +53,10 @@
         margin-left: auto;
         margin-right: 5%;
     }
+    
+    .strikethrough p.Title {
+        text-decoration: line-through;
+      }
 }
 
 /* Tablet */
@@ -115,5 +119,116 @@
 
 /* Mobile */
 @media screen and (max-width: 720px) {
+        .ActitiesCard {
+        background-color: #DFDFDF;
+        display: flex;
+        align-items: center;
+        margin: 0 5% 1%;
+        border-radius: 20px;
+        justify-content: space-between;
+    }
+
+    .ActitiesCard:hover{
+        background-color: #d8d8d8;
+    }
+    
+    
+    .ActitiesDetail {
+        margin: 5px;
+    }
+
+    .ActitiesDetail {
+        p {
+            margin: 5px;
+        }
+
+        .Title {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .Description {
+            font-size: 0.8125rem;
+            font-weight: 400;
+        }
+    }
+
+    .ActitiesDetail span {
+        display: inline-flex;
+        align-items: center;
+        margin: 5px;
+    }
+
+    .ActitiesDetail .DueDate,
+    .ActitiesDetail .DueTime {
+        font-size: 0.8125rem;
+        color: #35383C;
+        font-weight: medium;
+        line-height: 1;
+        margin-left: 5px;
+    }
+
+    .more-icon {
+        margin-left: auto;
+        margin-right: 5%;
+    }
+
+}
+
+
+@media screen and (max-width: 574px) {
+    .ActitiesCard {
+    background-color: #DFDFDF;
+    display: flex;
+    align-items: center;
+    margin: 0 5% 1%;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+.ActitiesCard:hover{
+    background-color: #d8d8d8;
+}
+
+
+.ActitiesDetail {
+    margin: 5px;
+}
+
+.ActitiesDetail {
+    p {
+        margin: 5px;
+    }
+
+    .Title {
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .Description {
+        font-size: 0.8125rem;
+        font-weight: 400;
+    }
+}
+
+.ActitiesDetail span {
+    display: inline-flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.ActitiesDetail .DueDate,
+.ActitiesDetail .DueTime {
+    font-size: 0.8125rem;
+    color: #35383C;
+    font-weight: medium;
+    line-height: 1;
+    margin-left: 5px;
+}
+
+.more-icon {
+    margin-left: auto;
+    margin-right: 5%;
+}
 
 }

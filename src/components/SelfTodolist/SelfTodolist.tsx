@@ -6,7 +6,6 @@ import "./styles/SelfTodoliststyle.css";
 import SelfTodoItem from "./SelfTodoItem";
 import { todoApi } from "../../api/TodoApi";
 import SelfTodoAddEvent from './SelfTodoEvent/SelfTodoAddEvent';
-import SelfTodoFilter from './SelfTodoEvent/SelfTodoFilter';
 import UpdateSelfTodoForm from './UpdateDeleteSelfTodoForm/UpdateSelfTodoForm';
 import AddTodoDialog from '../TodoList/NewTodoDialog';
 import DeleteSelfTodoForm from './UpdateDeleteSelfTodoForm/DeleteSelfTodoForm';
@@ -16,6 +15,8 @@ export interface ITodo {
     title: string;
     description?: string;
     dueDate?: string;
+    status?: string;
+    // isDone: boolean;
 }
 
 const SelfTodolist = () => {
@@ -23,13 +24,21 @@ const SelfTodolist = () => {
     const [openAddToDoDialog, setOpenAddToDoDialog] = useState<boolean>(false);
     const [openEditTodo, setOpenEditTodo] = useState(false);
     const [openDeleteTodo, setOpenDeleteTodo] = useState(false);
+    const [openCheckTodo, setOpenCheckTodo] = useState(false);
     const [todoToEdit, setTodoToEdit] = useState<ITodo>();
     const [idToDelete, setIdToDelete] = useState<string>('');
+    
 
     const getTodos = useCallback(async () => {
         try {
             const result = await todoApi.getTodos();
             setTodos(result.data);
+            // const incompleteTasks = result.data.filter(todo => !todo.isDone);
+            // setIncompleteTaskCount(incompleteTasks.length);
+
+            // const today = new Date().toLocaleDateString();
+            // const todayTasks = result.data.filter(todo => todo.dueDate === today);
+            // setTodayTaskCount(todayTasks.length);
         } catch (error) {
             console.error('Error fetching todos:', error);
         }
@@ -62,14 +71,14 @@ const SelfTodolist = () => {
                             startIcon={<Inventory2OutlinedIcon sx={iconStyle} />}
                         >
                             <span className="showAlltask">All</span>
-                            <span className="showIncompeletetask">10</span>
+                            {/* <span className="showIncompeletetask">10</span> */}
                         </Button>
 
                         <Button id="Todaybtn" variant="outlined"
                             startIcon={<CalendarTodayOutlinedIcon sx={iconStyle} />}
                         >
                             <span className="showTodaytask">Today</span>
-                            <span className="showIncompeletetask">1</span>
+                            {/* <span className="showIncompeletetask">{todayTaskCount}</span> */}
                         </Button>
                     </div>
 
@@ -100,7 +109,9 @@ const SelfTodolist = () => {
                                     setOpenDeleteTodo(true);
                                 }}
                                 onDelete={getTodos}
-                                key={t.id} />
+                                key={t.id}
+                                onCheck={getTodos} 
+                                />
                             ))}
                         </div>
                     </div>

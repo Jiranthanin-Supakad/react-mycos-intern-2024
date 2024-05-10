@@ -1,26 +1,21 @@
 import { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import TextRotateVerticalTwoToneIcon from '@mui/icons-material/TextRotateVerticalTwoTone';
-import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
-import { Box, Grid } from '@mui/material';
+import { ITodo } from '../SelfTodolist';
 
-const SelfTodoFilter = () => {
+const SelfTodoFilter = ({ 
+    onUpdateInnerTodo 
+}: { 
+    onUpdateInnerTodo: (todo: ITodo[]) => void; 
+}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [filterByTitle, setFilterByTitle] = useState(false);
-    const [filterByDate, setFilterByDate] = useState(false);
+    const [innerTodo, setInnerTodo] = useState<ITodo[]>([]);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
-    };
-
-    const handleFilterByTitle = () => {
-        setFilterByTitle(!filterByTitle);
-        setFilterByDate(false);
-    };
-
-    const handleFilterByDate = () => {
-        setFilterByDate(!filterByDate);
-        setFilterByTitle(false);
+        if (!isOpen) {
+            sortTodo();
+        }
     };
 
     useEffect(() => {
@@ -42,23 +37,21 @@ const SelfTodoFilter = () => {
         };
     }, [isOpen]);
 
+    const sortTodo = () => {
+        onUpdateInnerTodo(innerTodo); 
+    };
+
     return (
         <>
             <div className='filter'>
                 <div className="dropdown-title" onClick={toggleDropdown}>
                     <FilterAltOutlinedIcon sx={{ fontSize: '2rem', color: isOpen ? '#9ca1a7' : '#35383C' }} />
-                    {/* <span style={{fontSize: 15, marginBottom: 0.3, color: isOpen ? '#9ca1a7' : '#35383C'}}>Filter</span> style={{display: 'flex', alignItems: "end", width:"4rem"}} */}
                 </div>
                 {isOpen && (
-                    <div className='filter-container'>
+                    <div className='filter-container' onClick={sortTodo}>
                         <button className='filter-container-btn'>
                             <p>Title</p>
                             <TextRotateVerticalTwoToneIcon />
-                            {/* <SelfTodoItem todos={filteredTodos} onFilterByTitle={handleFilterByTitle} /> */}
-                        </button>
-                        <button className='filter-container-btn' onClick={handleFilterByDate}>
-                            <p>Date</p>
-                            <EventNoteOutlinedIcon />
                         </button>
                     </div>
                 )}

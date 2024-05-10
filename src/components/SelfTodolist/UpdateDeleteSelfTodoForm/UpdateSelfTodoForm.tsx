@@ -41,20 +41,8 @@ const UpdateSelfTodoForm = ({
         }
         onSuccess?.();
         onClose();
+        window.location.reload();
     };
-
-    const loadTodo = useCallback(async (id: string) => {
-        const res = await todoApi.getTodo(id);
-        setTodo(res.data);
-        setTodoTitle(res.data.title ?? "");
-        setTodoDescription("");
-    }, []);
-
-    useEffect(() => {
-        if (id) {
-            loadTodo(id);
-        }
-    }, [id, loadTodo]);
 
     useEffect(() => {
         if (open) {
@@ -62,7 +50,6 @@ const UpdateSelfTodoForm = ({
                 setTodoTitle(dataToEdit.title);
                 setTodoDescription(dataToEdit?.description ? dataToEdit?.description : "");
                 setTodoDueDate(dataToEdit?.dueDate ? dataToEdit.dueDate : "")
-
             }
         }
     }, [open]);
@@ -87,6 +74,7 @@ const UpdateSelfTodoForm = ({
         defaultValues: {
             title: "",
             description: "",
+            dueDate: ""
         },
     })
 
@@ -107,7 +95,7 @@ const UpdateSelfTodoForm = ({
                                 variant="outlined"
                                 value={todoTitle}
                                 autoComplete="off"
-                                {...register("title", { required: true })}
+                                {...register("title", { required: !dataToEdit })} 
                                 helperText={errors?.title ? "title is required" : ""}
                                 onChange={(e) => {
                                     setTodoTitle(e.target.value);
@@ -168,7 +156,7 @@ const UpdateSelfTodoForm = ({
                                 }}
                             />
                         </Grid>
-                        <Grid item>
+                        {/* <Grid item>
                             <TextField
                                 fullWidth
                                 type="time"
@@ -187,7 +175,7 @@ const UpdateSelfTodoForm = ({
                                     },
                                 }}
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </DialogContent>
                 <DialogActions sx={{ justifyContent: 'center', margin: '2%' }}>

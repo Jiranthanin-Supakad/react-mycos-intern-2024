@@ -137,7 +137,7 @@ const SelfTodoForm = ({
                                 }}
                             />
                         </Grid>
-                        <Grid item>
+                        {/* <Grid item>
                             <TextField
                                 fullWidth
                                 type="time"
@@ -156,7 +156,7 @@ const SelfTodoForm = ({
                                     },
                                 }}
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </DialogContent>
                 <DialogActions sx={{ justifyContent: 'center', margin: '2%' }}>

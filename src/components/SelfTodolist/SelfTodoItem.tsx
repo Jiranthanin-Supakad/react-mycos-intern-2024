@@ -2,9 +2,8 @@ import { Checkbox } from '@mui/material';
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined';
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import AlarmOutlinedIcon from '@mui/icons-material/AlarmOutlined';
 import "./styles/SelfTodoItemstyle.css";
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ITodo } from './SelfTodolist';
 import SelfTodoEvent from './SelfTodoEvent/SelfTodoEvent';
 import { todoApi } from '../../api/TodoApi';
@@ -17,15 +16,18 @@ const SelfTodoItem = ({
     props,
     onEdit,
     onDelete,
-    sentId
+    sentId,
+    onCheck
 }: {
     props: ITodo;
     onEdit: (todo: ITodo) => void;
     onDelete: () => void;
     sentId: (id: string) => void;
+    onCheck: () => void;
 }) => {
     const todoItem = { ...props };
     const [innerTodo, setInnerTodo] = useState<ITodo>(todoItem);
+    const [isChecked, setIsChecked] = useState(false);
 
     function handleSuccess(): void {
         try {
@@ -46,6 +48,57 @@ const SelfTodoItem = ({
         }
     }
 
+    // const handleCheckboxChange = async () => {
+    //     try{
+    //         await todoApi.updateTodo(innerTodo.id!, 
+    //             {
+    //                 ...innerTodo,
+    //                 status: isChecked ? "Incomplete" : "Complete"
+    //             })
+    //     } catch {
+    //         throw new Error("Update status fail")
+    //     } finally {
+    //         setIsChecked(!isChecked);
+    //         onCheck(!isChecked);
+    //     }
+    // }
+
+    const handleCheckboxChange = async () => {
+        try {
+            const updatedTodo = {
+                ...innerTodo,
+                status: isChecked ? "Incomplete" : "Complete"
+            };
+    
+            await todoApi.updateTodo(innerTodo.id!, updatedTodo);
+            // setInnerTodo(updatedTodo);
+            setIsChecked(!isChecked);
+            onCheck();
+        } catch (error) {
+            console.error("Update status failed:", error);
+        }
+    };
+
+    const checkBox = () => {
+        if (innerTodo.status === "Complete")
+            setIsChecked(true);
+    }
+
+    useEffect(() => {
+        checkBox();
+    }, []);
+
+    // useEffect(() => {
+    //     if (open) {
+    //         if (dataToEdit) {
+    //             setTodoTitle(dataToEdit.title);
+    //             setTodoDescription(dataToEdit?.description ? dataToEdit?.description : "");
+    //             setTodoDueDate(dataToEdit?.dueDate ? dataToEdit.dueDate : "")
+    //         }
+    //     }
+    // }, [open]);
+
+
     return (
         <>
             <div className="ActitiesCard">
@@ -53,8 +106,10 @@ const SelfTodoItem = ({
                     icon={<RadioButtonUncheckedOutlinedIcon />}
                     checkedIcon={<RadioButtonCheckedOutlinedIcon />}
                     style={{ margin: '1% 2%' }}
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
                 />
-                <div className="ActitiesDetail">
+                <div className={`ActitiesDetail`} style={{textDecoration: isChecked ? 'line-through' : 'none'}}>
                     <p className='Title'>{innerTodo.title}</p>
                     <p className='Description'>{innerTodo.description}</p>
                     <span>
