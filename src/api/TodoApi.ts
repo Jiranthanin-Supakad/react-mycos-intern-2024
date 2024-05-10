@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ITodo } from "../components/SelfTodolist/SelfTodolist";
-const base_url = import.meta.env.VITE_API_URL;
+const base_url = import.meta.env.VITE_API_URL+"/Todo";
 export const todoApi = {
   getTodos: () => axios.get<ITodo[]>(base_url),
   addTodo: (todo: ITodo) => axios.post(base_url, todo),
