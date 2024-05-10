@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, Grid, TextField, DialogActions, Button } from "@mui/material";
 import { todoApi } from "../../../api/TodoApi";
-import "/Users/jiran/Documents/GitHub/react-mycos-intern-2024/src/components/SelfTodolist/styles/SelfTodoFormpopup.css"
+import "../styles/SelfTodoFormpopup.css"
 import { useForm } from "react-hook-form";
 import { ISelfTodoForm } from "../SelfTodoForm/ISelfTodoForm";
 import { ITodo } from "../SelfTodolist";
